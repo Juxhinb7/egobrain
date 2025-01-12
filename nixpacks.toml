@@ -1,5 +1,2 @@
 [start]
 cmd = "gunicorn main:app"
-
-[variables]
-OPENAI_API_KEY="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"
