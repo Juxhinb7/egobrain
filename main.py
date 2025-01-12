@@ -14,10 +14,9 @@ from flask import Flask, stream_with_context
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app, resources={r"/streaming": {"origins": "https://https://egobrain-production.up.railway.app:8080"}})
+CORS(app)
 
 @app.route("/streaming")
-@cross_origin(origin="https://egobrain-production.up.railway.app")
 def streaming():
 
     # check if storage already exists
