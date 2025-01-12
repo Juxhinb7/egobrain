@@ -10,7 +10,7 @@ from llama_index.core import (
 from llama_index.llms.openai import OpenAI
 import os
 
-from flask import Flask, stream_with_context, request, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
