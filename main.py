@@ -10,7 +10,7 @@ from llama_index.core import (
 from llama_index.llms.openai import OpenAI
 import os
 
-from flask import Flask, request, jsonify
+from flask import Flask, stream_with_context, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -36,5 +36,5 @@ def streaming():
     # Either way we can now query the index
     Settings.llm = OpenAI(model="gpt-4o-mini")
 
-    return jsonify({'output': index.as_query_engine(streaming=True).query(content["prompt"]).response_gen})
+    return stream_with_context(index.as_query_engine(streaming=True).query(content["prompt"]).response_gen)
 
