@@ -36,5 +36,5 @@ def streaming():
     # Either way we can now query the index
     Settings.llm = OpenAI(model="gpt-4o-mini")
 
-    return jsonify({'output': index.as_query_engine(streaming=True).query(content["prompt"])})
+    return jsonify({'output': index.as_query_engine(streaming=True).query(content["prompt"]).response_gen})
 
