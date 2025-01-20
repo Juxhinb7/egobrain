@@ -19,6 +19,7 @@ CORS(app)
 @app.route("/streaming", methods=["POST"])
 def streaming():
     content = request.get_json()
+    os.environ['OPENAI_API_KEY'] = content["apiKey"]
 
     # check if storage already exists
     PERSIST_DIR = "./storage"
