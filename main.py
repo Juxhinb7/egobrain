@@ -9,8 +9,10 @@ from llama_index.core import (
 
 from llama_index.llms.openai import OpenAI
 import os
+import openai
+from openai import OpenAIError
 
-from flask import Flask, stream_with_context, request
+from flask import Flask, stream_with_context, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -37,5 +39,8 @@ def streaming():
     # Either way we can now query the index
     Settings.llm = OpenAI(model="gpt-4o-mini")
 
-    return stream_with_context(index.as_query_engine(streaming=True).query(content["prompt"]).response_gen)
+    try:
+        return stream_with_context(index.as_query_engine(streaming=True).query(content["prompt"]).response_gen)
+    except OpenAIError as e:
+        return jsonify({"errorMessage": e.args[0]})
 
