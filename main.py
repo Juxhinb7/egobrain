@@ -42,5 +42,5 @@ def streaming():
     try:
         return stream_with_context(index.as_query_engine(streaming=True).query(content["prompt"]).response_gen)
     except OpenAIError as e:
-        return jsonify({"errorMessage": e.args[0]}), 500
+        return jsonify(e.args[0]), 401
 
