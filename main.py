@@ -39,8 +39,6 @@ def streaming():
     # Either way we can now query the index
     Settings.llm = OpenAI(model="gpt-4o-mini")
 
-    try:
-        return stream_with_context(index.as_query_engine(streaming=True).query(content["prompt"]).response_gen)
-    except OpenAIError as e:
-        return jsonify(e.args[0]), 401
+    
+    return stream_with_context(index.as_query_engine(streaming=True).query(content["prompt"]).response_gen)
 
